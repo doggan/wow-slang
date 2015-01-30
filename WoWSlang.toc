@@ -1,0 +1,11 @@
+## Interface: 20200
+## Title: WoWSlang
+## Version: 1.0
+## Notes: An in-game dictionary of commonly used WoW slang.
+## Author: Shyam 'Doggan' Guthikonda
+## Email: shyamguth@gmail.com
+## URL: http://shy.am
+
+WoWSlangDict.lua
+WoWSlang.lua
+WoWSlang.xml

@@ -1,0 +1,114 @@
+<!--
+Author   : Shyam "Doggan" Guthikonda
+Modified : 11.19.07
+Desc     : The dictionary "pop-up" window for the WoWSlang AddOn.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+    
+    <!-- The main frame. -->
+	<Frame name="WoWSlang_Frame" parent="UIParent" movable="true" enableMouse="true" inherits="DialogBoxFrame">
+		<Size>
+			<AbsDimension x="500" y="500"/>
+		</Size>
+        <Anchors>
+            <Anchor points="CENTER"/>
+        </Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+            <Layer>
+                <!-- Main frame's border, with a nice spot for a header. -->
+                <Texture name="$parent_WindowBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+                    <Size>
+                        <AbsDimension x="160" y="32" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="5" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+                </Texture>
+                
+                <!-- The title at the top of the frame. -->
+                <FontString name="$parent_WindowTitle" font="Fonts\FRIZQT__.TTF">
+                    <Size>
+                        <AbsDimension x="140" y="0" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-4" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <FontHeight>
+                        <AbsValue val="12" />
+                    </FontHeight>
+                    <Color r="1" g="0.8196079" b="0" />
+                    <Shadow>
+                        <Color r="0" g="0" b="0" />
+                        <Offset>
+                            <AbsDimension x="1" y="-1" />
+                        </Offset>
+                    </Shadow>
+                </FontString>
+            </Layer>
+		</Layers>
+		<Frames>
+        
+            <!-- The scroll area. -->
+			<ScrollFrame name="$parent_Scroll" inherits="UIPanelScrollFrameTemplate" toplevel="true">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="-10" y="-26"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="455" y="420"/>
+				</Size>
+                
+                <!-- Text area in the scroll region. -->
+				<ScrollChild>
+                    <SimpleHTML name="$parent_Text" letters="9999" multiLine="true" autoFocus="false" enableMouse="true">
+                        <Size>
+							<AbsDimension x="450" y="420"/>
+						</Size>
+                        <FontString inherits="ChatFontNormal"/>
+                    </SimpleHTML>                    
+				</ScrollChild>
+			</ScrollFrame>
+		</Frames>
+		<Scripts>
+            <OnLoad>
+                WoWSlang_OnLoad();
+            </OnLoad>
+            <OnEvent>
+                WoWSlang_OnEvent(self, event);
+            </OnEvent>
+			<OnMouseDown>
+				if (button == "LeftButton") then
+					self:StartMoving()
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				self:StopMovingOrSizing()
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>
